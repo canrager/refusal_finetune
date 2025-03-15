@@ -82,16 +82,8 @@ def generate_dataset(
                     "assistant": refusal
                 })
     
-    # Shuffle and trim to requested number of samples
     random.shuffle(train_data)
     random.shuffle(test_data)
-    
-    if num_samples is None:
-        num_samples = len(train_data) + len(test_data)
-    num_train_samples = int(num_samples * train_ratio)
-    num_test_samples = num_samples - num_train_samples
-    train_data = train_data[:num_train_samples]
-    test_data = test_data[:num_test_samples]
     
     # Save datasets
     save_jsonl(train_data, os.path.join(output_dir, "train.jsonl"))
